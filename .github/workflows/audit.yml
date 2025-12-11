@@ -25,12 +25,14 @@ jobs:
       - name: Audit formulas
         run: |
           for formula in Formula/*.rb; do
-            brew audit --strict --online "$formula"
+            formula_name=$(basename "$formula" .rb)
+            brew audit --strict --online "skarlso/homebrew-tap/$formula_name"
           done
 
       - name: Test formula installation
         run: |
           for formula in Formula/*.rb; do
-            brew install "$formula"
-            brew test "$formula"
+            formula_name=$(basename "$formula" .rb)
+            brew install "skarlso/homebrew-tap/$formula_name"
+            brew test "skarlso/homebrew-tap/$formula_name"
           done
