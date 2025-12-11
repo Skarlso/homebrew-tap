@@ -34,6 +34,6 @@ class AdventureVoter < Formula
   end
 
   test do
-    assert_match "v0.0.4\\n", shell_output("#{bin}/adventure --version")
+    assert_match "0.0.4\\n", shell_output("#{bin}/adventure --version")
   end
 end
