@@ -1,0 +1,36 @@
+name: Audit Formulas
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  audit:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Tap repository
+        run: |
+          mkdir -p $(brew --repo)/Library/Taps/skarlso
+          ln -s $GITHUB_WORKSPACE $(brew --repo)/Library/Taps/skarlso/homebrew-tap
+
+      - name: Audit formulas
+        run: |
+          for formula in Formula/*.rb; do
+            brew audit --strict --online "$formula"
+          done
+
+      - name: Test formula installation
+        run: |
+          for formula in Formula/*.rb; do
+            brew install "$formula"
+            brew test "$formula"
+          done
