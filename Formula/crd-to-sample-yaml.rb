@@ -29,21 +29,6 @@ class CrdToSampleYaml < Formula
     end
   end
 
-  on_windows do
-    if Hardware::CPU.arm?
-      if Hardware::CPU.is_64_bit?
-        url "https://github.com/Skarlso/crd-to-sample-yaml/releases/download/v2.1.6/cty_windows_arm64.tar.gz"
-        sha256 "eb9c353a264a4936bfa8000e314f465bc2334280512eec8d1b1c39c7b1de37ff"
-      else
-        url "https://github.com/Skarlso/crd-to-sample-yaml/releases/download/v2.1.6/cty_windows_armv7.tar.gz"
-        sha256 "1afae8ef65e4ad0c7e05e435949a2ec0c804ab02492f922b3620256346aaaed8"
-      end
-    else
-      url "https://github.com/Skarlso/crd-to-sample-yaml/releases/download/v2.1.6/cty_windows_amd64.tar.gz"
-      sha256 "3acef820f94c08f91a44da984062e1e05681d3ec8b76205794d50f6bc8cf7fe3"
-    end
-  end
-
   def install
     bin.install "cty"
   end
