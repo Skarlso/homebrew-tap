@@ -34,6 +34,6 @@ class CrdToSampleYaml < Formula
   end
 
   test do
-    assert_match /2.1.6\n/, shell_output("#{bin}/cty --version")
+    assert_match /2.1.6\n/, shell_output("#{bin}/cty version")
   end
 end
